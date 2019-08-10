@@ -88,8 +88,22 @@ contains('yo-yo', items, function(contain) {
 
 /* STRETCH PROBLEM */
 
+const manyThings = ['spider', 'spider', 'spider', 'penguin', 'spider', 'spider', 'duck', 'spider'];
+
 function removeDuplicates(array, cb) {
   // removeDuplicates removes all duplicate values from the given array.
   // Pass the duplicate free array to the callback function.
   // Do not mutate the original array.
-}
+  const duplicates = [];
+  const newArray = cb(array.filter(function(el) {
+      if (duplicates.indexOf(el) == -1) {
+          duplicates.push(el);
+          return true;
+      }
+      return false;
+  }))
+};
+
+removeDuplicates(manyThings, function(fewThings) {
+    console.log(fewThings);
+});
