@@ -26,15 +26,6 @@ const tools = ['Hammer', 'Screwdriver', 'Crowbar', 'Wrench'];
     console.log(first)
   });
 
-  //My example
-  function firstItem2(arr) {
-      x = arr[0];
-      console.log(x);
-  };
-
-  firstItem2(items);
-  firstItem2(tools);
-
 
 function getLength(arr, cb) {
   // getLength passes the length of the array into the callback.
