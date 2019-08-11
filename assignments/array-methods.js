@@ -93,6 +93,30 @@ console.log(ticketPriceTotal);
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+// Create a new array listing all the companies that participated in the fun run. Log the result.
+
+
+let eachCompany = [];
+let compParticipate = [];
+
+runners.forEach(function(name) {
+    eachCompany.push(name.company_name)
+});
+
+function removeDuplicates(array, cb) {
+    const duplicates = [];
+    const newArray = cb(array.filter(function(el) {
+        if (duplicates.indexOf(el) == -1) {
+            duplicates.push(el);
+            return true;
+        } 
+        return false;    
+    }))
+};
+
+compParticipate = removeDuplicates(eachCompany, function(comp) {
+   console.log(comp);
+});
 
 // Problem 2
 
