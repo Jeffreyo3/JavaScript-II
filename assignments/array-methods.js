@@ -93,13 +93,21 @@ console.log(ticketPriceTotal);
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
-// Create a new array listing all the companies that participated in the fun run. Log the result.
+// Create a new array listing all the companies that participated in the fun run & alphabetize the list.
 let eachCompany = [];
-let compParticipate = [];
 
 runners.forEach(function(name) {
     eachCompany.push(name.company_name)
 });
+
+eachCompany.sort();
+
+// console.log(eachCompany);
+
+// Problem 2
+// Remove duplicates from the list & log the results.
+
+let compParticipate = [];
 
 function removeDuplicates(array, cb) {
     const duplicates = [];
@@ -109,13 +117,133 @@ function removeDuplicates(array, cb) {
             return true;
         } 
         return false;    
-    }))
+    }));
 };
 
 compParticipate = removeDuplicates(eachCompany, function(comp) {
-   console.log(comp);
+//    console.log(comp);
 });
 
-// Problem 2
-
 // Problem 3
+// A local university sociology student wants to do research on whether or not the size of the donor correlates with the size of the donation.
+// Since the university is hosting the fun run, you are obligated to help out this student.
+
+// Create new array to mutate.
+const correlationArray = runners.map((runners) => {
+    return {'shirt_size': runners.shirt_size, 'donation': runners.donation};
+});
+// console.log(correlationArray);
+
+// Convert shirt sizes to number (average sizing)
+const shirtSizes = [];
+const donationSizes = [];
+function convertSize(array) {
+    for(let i = 0; i < array.length; i++) {
+        if (array[i].shirt_size == 'XS') {
+            shirtSizes.push(4);
+            donationSizes.push(array[i].donation);
+        } else  if (array[i].shirt_size == 'S') {
+            shirtSizes.push(8);
+            donationSizes.push(array[i].donation);
+        } else if (array[i].shirt_size == 'M') {
+            shirtSizes.push(12);
+            donationSizes.push(array[i].donation);
+        } else if (array[i].shirt_size == 'L') {
+            shirtSizes.push(14);
+            donationSizes.push(array[i].donation);
+        } else if (array[i].shirt_size == 'XL') {
+            shirtSizes.push(18);
+            donationSizes.push(array[i].donation);
+        } else if (array[i].shirt_size == '2XL') {
+            shirtSizes.push(22);
+            donationSizes.push(array[i].donation);
+        } else if (array[i].shirt_size == '3XL') {
+            shirtSizes.push(26);
+            donationSizes.push(array[i].donation);
+        } else {return false} 
+    }    
+};
+// Initialize function
+convertSize(correlationArray);
+// console.log(shirtSizes);
+// console.log(donationSizes);
+
+// Find the Correlation Coefficient
+
+/* *  Source: http://stevegardner.net/2012/06/11/javascript-code-to-calculate-the-pearson-correlation-coefficient/ */
+function getPearsonCorrelation(x, y) {
+    var shortestArrayLength = 0;
+     
+    if(x.length == y.length) {
+        shortestArrayLength = x.length;
+    } else if(x.length > y.length) {
+        shortestArrayLength = y.length;
+        console.error('x has more items in it, the last ' + (x.length - shortestArrayLength) + ' item(s) will be ignored');
+    } else {
+        shortestArrayLength = x.length;
+        console.error('y has more items in it, the last ' + (y.length - shortestArrayLength) + ' item(s) will be ignored');
+    }
+  
+    var xy = [];
+    var x2 = [];
+    var y2 = [];
+  
+    for(var i=0; i<shortestArrayLength; i++) {
+        xy.push(x[i] * y[i]);
+        x2.push(x[i] * x[i]);
+        y2.push(y[i] * y[i]);
+    }
+  
+    var sum_x = 0;
+    var sum_y = 0;
+    var sum_xy = 0;
+    var sum_x2 = 0;
+    var sum_y2 = 0;
+  
+    for(var i=0; i< shortestArrayLength; i++) {
+        sum_x += x[i];
+        sum_y += y[i];
+        sum_xy += xy[i];
+        sum_x2 += x2[i];
+        sum_y2 += y2[i];
+    }
+  
+    var step1 = (shortestArrayLength * sum_xy) - (sum_x * sum_y);
+    var step2 = (shortestArrayLength * sum_x2) - (sum_x * sum_x);
+    var step3 = (shortestArrayLength * sum_y2) - (sum_y * sum_y);
+    var step4 = Math.sqrt(step2 * step3);
+    var answer = step1 / step4;
+    return answer;
+}
+
+
+// Write a function to interpret the Correlation Coefficient
+function check (answer) {
+    if (answer === -1.0) {
+        return "This is a perfect negative linear relationship.";
+    } else if (answer <= -0.70) {
+        return "This is a strong negative linear relationship.";
+    }  else if (answer <= -0.50) {
+        return "This is a moderate negative relationship.";
+    } else if (answer <= -0.30) {
+        return "This is a weak negative linear relationship.";
+    } else if (answer <= -0.10) {
+        return "This is a very weak negative relationship.";
+    } else if (answer >= 0.10) {
+        return "There is a very weak positive relationship.";
+    } else if (answer >= 0.30) {
+        return "This is a weak positive linear relationship.";
+    } else if (answer >= 0.50) {
+        return "This is a moderate positive relationship.";
+    } else if (answer >= 0.70) {
+        return "This is a strong positive linear relationship.";
+    } else if (answer === 1.0) {
+        return "This is a perfect positive linear relationship.";
+    } else {
+        return "There is no linear relationship";
+    }
+};
+
+console.log(check(getPearsonCorrelation(shirtSizes, donationSizes)));
+// The student concluded that there was little to no correlation between the shirt size and the size of the donation.
+
