@@ -94,8 +94,6 @@ console.log(ticketPriceTotal);
 
 // Problem 1
 // Create a new array listing all the companies that participated in the fun run. Log the result.
-
-
 let eachCompany = [];
 let compParticipate = [];
 
