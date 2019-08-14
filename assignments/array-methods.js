@@ -142,7 +142,7 @@ function convertSize(array) {
         if (array[i].shirt_size == 'XS') {
             shirtSizes.push(4);
             donationSizes.push(array[i].donation);
-        } else  if (array[i].shirt_size == 'S') {
+        } else if (array[i].shirt_size == 'S') {
             shirtSizes.push(8);
             donationSizes.push(array[i].donation);
         } else if (array[i].shirt_size == 'M') {
@@ -161,7 +161,7 @@ function convertSize(array) {
             shirtSizes.push(26);
             donationSizes.push(array[i].donation);
         } else {return false} 
-    }    
+    }
 };
 // Initialize function
 convertSize(correlationArray);
@@ -213,6 +213,7 @@ function getPearsonCorrelation(x, y) {
     var step3 = (shortestArrayLength * sum_y2) - (sum_y * sum_y);
     var step4 = Math.sqrt(step2 * step3);
     var answer = step1 / step4;
+    console.log(`The Correlation Coefficient is ${answer}`);
     return answer;
 }
 
@@ -246,4 +247,3 @@ function check (answer) {
 
 console.log(check(getPearsonCorrelation(shirtSizes, donationSizes)));
 // The student concluded that there was little to no correlation between the shirt size and the size of the donation.
-
