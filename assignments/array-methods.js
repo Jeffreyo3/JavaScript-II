@@ -128,12 +128,7 @@ compParticipate = removeDuplicates(eachCompany, function(comp) {
 // A local university sociology student wants to do research on whether or not the size of the donor correlates with the size of the donation.
 // Since the university is hosting the fun run, you are obligated to help out this student.
 
-// Create new array to mutate.
-const correlationArray = runners.map((runners) => {
-    return {'shirt_size': runners.shirt_size, 'donation': runners.donation};
-});
-// console.log(correlationArray);
-
+// Declare new arrays to mutate.
 // Convert shirt sizes to number (average sizing)
 const shirtSizes = [];
 const donationSizes = [];
@@ -164,7 +159,7 @@ function convertSize(array) {
     }
 };
 // Initialize function
-convertSize(correlationArray);
+convertSize(runners);
 // console.log(shirtSizes);
 // console.log(donationSizes);
 
