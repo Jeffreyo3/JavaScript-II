@@ -1,6 +1,21 @@
 // ==== Challenge 1: Write your own closure ====
 // Write a simple closure of your own creation.  Keep it simple!
+const containerSize = 2;
 
+function box (height, width) {
+    let boxCapacity = height * width;
+    let totalContainers = boxCapacity / containerSize;
+    
+    function exclaim () {
+        return `You will need ${totalContainers} containers to fill up your box!`;
+    }
+    console.log(exclaim());
+}
+
+box (5, 8);
+
+// let testScope = boxCapacity + containerSize;
+// console.log(testScope); 
 
 /* STRETCH PROBLEMS, Do not attempt until you have completed all previous tasks for today's project files */
 
